@@ -5,19 +5,50 @@
 var renderMW = require('../middleware/generic/render');
 var mainRedirectMW = require('../middleware/generic/mainredirect');
 
+var getItemListMW = require('../middleware/items/getItemList');
+var getItemMW = require('../middleware/items/getItem');
+
+var getCategoryListMW = require('../middleware/categories/getCategoryList');
+var getCategoryMW = require('../middleware/categories/getCategory');
+
+var filterItemListMW = require('../middleware/items/filterItemList');
+
+var itemModel = require('../models/item');
+var categoryModel = require('../models/category');
+
 module.exports = function(app){
 
     var objectRepository = {
-
+        itemModel: itemModel,
+        categoryModel: categoryModel
     };
 
     /**
-     * Item list
+     * GET: Item list
      */
     app.get('/items',
+        getItemListMW(objectRepository),
+        getCategoryListMW(objectRepository),
         renderMW(objectRepository, 'stock')
     );
 
-    
+    /**
+     * POST: Filter items
+     */
+    app.post('/items',
+        getItemListMW(objectRepository),
+        getCategoryListMW(objectRepository),
+        filterItemListMW(objectRepository),
+        renderMW(objectRepository, 'stock')
+    );
+
+    /**
+     * GET: Details of the item with the provided id
+     */
+    app.get('/items/:id/details',
+        getItemMW(objectRepository),
+        getCategoryMW(objectRepository),
+        renderMW(objectRepository, 'details')
+    );
 
 };

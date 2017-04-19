@@ -1,0 +1,24 @@
+<%- include('header') %>
+<%- include('menu') %>
+
+<div class="col-xs-12 text-center">
+    <h2 class="text-info">Register</h2>
+</div>
+<div class="col-md-push-3 col-md-6 col-xs-12">
+    <%- include('errorbox') %>
+    <form method="POST">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+        </div>
+        <input type="submit" class="btn btn-primary col-xs-6 col-md-4" value="Register"/> &nbsp;
+        <a href="/login" class="btn btn-default">Cancel</a>
+    </form>
+
+</div>
+
+<%- include('footer') %>

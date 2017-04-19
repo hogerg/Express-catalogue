@@ -5,12 +5,19 @@
 var express = require('express');
 var app = express();
 
+var bodyParser = require('body-parser');
+
 app.set('view engine', 'ejs');
 
 app.use(express.static('static'));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 /**
- * A template es error tarolok letrehozasa a response-on
+ * Initialize template and error template field on response
  */
 app.use(function (req, res, next) {
     res.tpl = {};
@@ -20,13 +27,14 @@ app.use(function (req, res, next) {
 });
 
 require('./routes/item')(app);
+require('./routes/manage')(app);
 require('./routes/other')(app);
 
 /**
  * Error handler
  */
 app.use(function (err, req, res, next) {
-    res.status(500).send('Hiba tortent!');
+    res.status(500).send('Error!');
     console.error(err.stack);
 });
 

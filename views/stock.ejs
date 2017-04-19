@@ -2,13 +2,43 @@
 <%- include('menu') %>
 
 <div class="col-md-4">
-    <form method="POST" class="input-group text-center">
-        <input class="form-control" id="inputSearch" type="text" name="keyword">
-        <span class="input-group-btn">
-            <input class="btn btn-default" type="submit" value="Search"/>
-        </span>
+    <form method="POST" class="input-group">
+        <input class="form-control col-md-6" id="inputSearch" type="text" name="keyword" placeholder="Search...">
+        <select class="form-control col-md-6" id="category" name="category">
+            <option value="0" selected>Filter category</option>
+            <% categories.forEach(function(category){
+            %>
+                    <option value="<%= category._id %>"><%= category.name %></option>
+            <%
+            });
+            %>
+        </select>
+        <input class="btn btn-default col-md-6" type="submit" value="Search"/>
     </form>
-    <hr />
+</div>
+
+<div class="col-md-8">
+
+    <%
+        items.forEach(function(item){
+    %>
+    <div class="thumbnail clearfix" style="margin-bottom:5px">
+        <img src="http://placehold.it/600x400" class="pull-left col-md-4 col-xs-4" style="padding-left:0px">
+        <span class="caption">
+            <strong><a href="/items/<%= item._id %>/details"><%= item.name %></a>
+            </strong> <span class="pull-right"><%= item.price %>.-</span>
+            <br><br>
+            <p class="text-justify">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam interdum ut leo vitae ullamcorper.
+                Quisque eget odio in enim molestie pretium. Donec sollicitudin faucibus risus, convallis semper odio posuere non.
+                Phasellus aliquet sem augue.
+            </p>
+        </span>
+    </div>
+    <%
+        });
+    %>
+
 </div>
 
 <%- include('footer') %>

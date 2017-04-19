@@ -12,14 +12,51 @@ module.exports = function(app){
     };
 
     /**
-     * Website description
+     * GET: Login view
+     */
+    app.get('/login',
+        renderMW(objectRepository, 'login')
+    );
+
+    /**
+     * POST: Login information
+     */
+    app.post('/login',
+        renderMW(objectRepository, 'login')
+    );
+
+    /**
+     * User logout
+     */
+    app.use('/logout',
+        function (req, res, next) {
+            return res.redirect('/items');
+        }
+    );
+
+    /**
+     * GET: Register view
+     */
+    app.get('/register',
+        renderMW(objectRepository, 'register')
+    );
+
+    /**
+     * POST: Register information
+     */
+    app.post('/register',
+        renderMW(objectRepository, 'register')
+    );
+
+    /**
+     * GET: Website description
      */
     app.get('/about',
         renderMW(objectRepository, 'info')
     );
 
     /**
-     * Contact information
+     * GET: Contact information
      */
     app.get('/contact',
         renderMW(objectRepository, 'contact')

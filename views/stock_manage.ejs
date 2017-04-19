@@ -1,0 +1,94 @@
+<%- include('header') %>
+<%- include('menu') %>
+
+<div class="col-md-10 col-md-push-1">
+
+    <h2 class="text-center">Manage items</h2>
+
+    <p>
+        <a href="/items/new" class="btn btn-default">Add item</a>
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
+        </tr>
+
+        <% items.forEach(function(item){ %>
+        <tr>
+            <td>
+                <%= item._id %>
+            </td>
+            <td>
+                <%=
+                    categories.find(function(category){
+                        return item.category.equals(category._id);
+                    }).name;
+                %>
+            </td>
+            <td>
+                <%= item.name %>
+            </td>
+            <td>
+                <%= item.price %>
+            </td>
+            <td class="text-right">
+                <a href="/items/<%= item._id %>/edit">Modify</a> |
+                <a href="/items/<%= item._id %>/delete">Remove</a>
+            </td>
+        </tr>
+        <% }); %>
+
+
+    </table>
+
+    <br>
+
+    <h2 class="text-center">Manage categories</h2>
+
+    <p>
+        <a href="/categories/new" class="btn btn-default">Add category</a>
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+
+        <% categories.forEach(function(category){ %>
+        <tr>
+            <td>
+                <%= category._id %>
+            </td>
+            <td>
+                <%= category.name %>
+            </td>
+            <td class="text-right">
+                <a href="/categories/<%= category._id %>/edit">Modify</a> |
+                <a href="/categories/<%= category._id %>/delete">Remove</a>
+            </td>
+        </tr>
+        <% }); %>
+    </table>
+
+</div>
+
+<%- include('footer') %>

@@ -1,0 +1,40 @@
+<%- include('header') %>
+<%- include('menu') %>
+
+<div class="col-md-push-3 col-md-6 col-xs-12">
+
+    <h2 class="text-center text-info"><%= (typeof item !== 'undefined') ? 'Modify item' : 'Add new item' %></h2>
+
+    <%- include('errorbox') %>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="name">Item name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name" name="name"
+                   value="<%= (typeof item !== 'undefined') ? item.name : '' %>">
+        </div>
+
+        <div class="form-group">
+            <label for="price">Item price</label>
+            <input type="number" min="0" class="form-control" id="price" name="price"
+                   value="<%= (typeof item !== 'undefined') ? item.price : 0 %>">
+        </div>
+
+        <select class="form-control col-md-6" id="category" name="category">
+            <% categories.forEach(function(category){ %>
+                <option value="<%= category._id %>"
+                        <%= (typeof item !== 'undefined' && item.category == category._id) ? 'selected' : '' %>
+                ><%= category.name %></option>
+            <% }); %>
+        </select>
+
+        <br><br>
+
+        <input type="submit" class="btn btn-primary" value="Confirm"/>
+        <a href="/manage" class="btn btn-default">Cancel</a>
+    </form>
+
+</div>
+
+
+<%- include('footer') %>
