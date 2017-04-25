@@ -6,10 +6,20 @@ var express = require('express');
 var app = express();
 
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 app.set('view engine', 'ejs');
 
 app.use(express.static('static'));
+
+app.use(session({
+    secret: 'express-catalogue-session',
+    cookie: {
+        maxAge: 60000
+    },
+    resave: true,
+    saveUninitialized: false
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

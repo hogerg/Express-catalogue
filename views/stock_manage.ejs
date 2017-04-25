@@ -32,11 +32,11 @@
                 <%= item._id %>
             </td>
             <td>
-                <%=
-                    categories.find(function(category){
-                        return item.category.equals(category._id);
-                    }).name;
-                %>
+                <%= item.category ?
+                        categories.find(function (category) {
+                            return item.category.equals(category._id);
+                        }).name
+                    : ''; %>
             </td>
             <td>
                 <%= item.name %>

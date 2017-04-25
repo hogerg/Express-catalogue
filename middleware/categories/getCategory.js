@@ -24,7 +24,7 @@ module.exports = function (objectrepository) {
                 return next();
             });
         }
-        else{
+        else if(res.tpl.item.category != null){
             categoryModel.findOne({
                 _id: res.tpl.item.category
             }, function (err, result) {
@@ -36,6 +36,7 @@ module.exports = function (objectrepository) {
                 return next();
             });
         }
+        else return next();
 
     };
 

@@ -11,7 +11,7 @@ module.exports = function (objectrepository) {
     return function (req, res, next) {
 
         var keyword = req.param('keyword');
-        var category = '.*';
+        var category = '.';
         if(req.param('category') !== '0') {
             category = req.param('category');
             itemModel.find({

@@ -18,8 +18,11 @@
                 <li><a href="/manage">Manage</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
-                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
+                <%- (typeof session === 'undefined') || (typeof session.sid === 'undefined') ?
+                '<li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>' +
+                '<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>'
+                : '<li><a>' + session.email + '</a></li>' +
+                '<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>' %>
             </ul>
         </div>
     </div>

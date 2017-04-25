@@ -9,11 +9,16 @@
     <form method="POST">
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+            <input type="text" class="form-control" name="email" id="email"
+                   placeholder="Email" value="<%= typeof email !== 'undefined' ? email : '' %>">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+            <input type="password" class="form-control" name="password" id="password" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="password_confirm">Password confirmation</label>
+            <input type="password" class="form-control" name="password_confirm" id="password_confirm" placeholder="">
         </div>
         <input type="submit" class="btn btn-primary col-xs-6 col-md-4" value="Register"/> &nbsp;
         <a href="/login" class="btn btn-default">Cancel</a>

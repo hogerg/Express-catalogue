@@ -8,7 +8,8 @@ var db = require('../config/db');
 var Item = db.model('Item', {
     name: String,
     price: Number,
-    category: Schema.Types.ObjectId
+    category: Schema.Types.ObjectId,
+    description: String
 });
 
 module.exports = Item;

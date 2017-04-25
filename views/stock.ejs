@@ -29,9 +29,9 @@
             </strong> <span class="pull-right"><%= item.price %>.-</span>
             <br><br>
             <p class="text-justify">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam interdum ut leo vitae ullamcorper.
-                Quisque eget odio in enim molestie pretium. Donec sollicitudin faucibus risus, convallis semper odio posuere non.
-                Phasellus aliquet sem augue.
+                <%= typeof item.description !== 'undefined' ? item.description.substr(0, 420) : '' %>
+                <%= typeof item.description !== 'undefined' && item.description.length > 420 ? '...' : '' %>
+                <strong><a href="/items/<%= item._id %>/details">[Read more]</a></strong>
             </p>
         </span>
     </div>

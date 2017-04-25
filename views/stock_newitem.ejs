@@ -20,15 +20,23 @@
                    value="<%= (typeof item !== 'undefined') ? item.price : 0 %>">
         </div>
 
-        <select class="form-control col-md-6" id="category" name="category">
-            <% categories.forEach(function(category){ %>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-control col-md-6" id="category" name="category">
+                <% categories.forEach(function(category){ %>
                 <option value="<%= category._id %>"
                         <%= (typeof item !== 'undefined' && item.category == category._id) ? 'selected' : '' %>
                 ><%= category.name %></option>
-            <% }); %>
-        </select>
+                <% }); %>
+            </select>
+        </div>
 
-        <br><br>
+        <br/>
+
+        <div class="form-group">
+            <label for="description">Description (optional)</label> <br>
+            <textarea id="description" name="description" rows="10" cols="50"></textarea>
+        </div>
 
         <input type="submit" class="btn btn-primary" value="Confirm"/>
         <a href="/manage" class="btn btn-default">Cancel</a>

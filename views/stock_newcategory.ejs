@@ -3,7 +3,7 @@
 
 <div class="col-md-push-3 col-md-6 col-xs-12">
 
-    <h2 class="text-center text-info"><%= (typeof category !== 'undefined') ? 'Modify category' : 'Add new category' %></h2>
+    <h2 class="text-center text-info"><%= typeof category !== 'undefined' ? 'Modify category' : 'Add new category' %></h2>
 
     <%- include('errorbox') %>
 
@@ -11,7 +11,7 @@
         <div class="form-group">
             <label for="name">Category name</label>
             <input type="text" class="form-control" id="name" placeholder="Name" name="name"
-                   value="<%= (typeof category !== 'undefined') ? category.name : '' %>">
+                   value="<%= typeof category !== 'undefined' ? category.name : '' %>">
         </div>
 
         <input type="submit" class="btn btn-primary" value="Confirm"/>

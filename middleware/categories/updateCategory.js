@@ -13,7 +13,7 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        if (typeof req.body.name === 'undefined'){
+        if (req.body.name === ''){
             res.tpl.error.push('Name required')
 
             return next();

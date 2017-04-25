@@ -13,19 +13,19 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        if ((typeof req.body.name === 'undefined') ||
-            (typeof req.body.price === 'undefined') ||
-            (typeof req.body.category === 'undefined')) {
+        if ((req.body.name === '') ||
+            (req.body.price === '') ||
+            (req.body.category === '')) {
 
-            if(typeof req.body.name === 'undefined'){
+            if(req.body.name === ''){
                 res.tpl.error.push('Name required')
             }
 
-            if(typeof req.body.price === 'undefined'){
+            if(req.body.price === ''){
                 res.tpl.error.push('Price required')
             }
 
-            if(typeof req.body.category === 'undefined'){
+            if(req.body.category === ''){
                 res.tpl.error.push('Category required')
             }
 
@@ -41,6 +41,7 @@ module.exports = function (objectrepository) {
         item.name = req.body.name;
         item.price = req.body.price;
         item.category = req.body.category;
+        item.description = req.body.description;
 
         item.save(function (err, result) {
             if (err) {

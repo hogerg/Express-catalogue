@@ -3,18 +3,26 @@
  */
 
 var renderMW = require('../middleware/generic/render');
+var checkUserRegistrationMW = require('../middleware/user/checkUserRegistration');
+var checkUserLoginMW = require('../middleware/user/checkUserLogin');
 var mainRedirectMW = require('../middleware/generic/mainredirect');
+var logoutMW = require('../middleware/generic/logout');
+var inverseAuthMW = require('../middleware/generic/inverseAuthenticate');
+var getSessionIdMW = require('../middleware/generic/getSessionId');
+
+var userModel = require('../models/user');
 
 module.exports = function(app){
 
     var objectRepository = {
-
+        userModel: userModel
     };
 
     /**
      * GET: Login view
      */
     app.get('/login',
+        inverseAuthMW(objectRepository),
         renderMW(objectRepository, 'login')
     );
 
@@ -22,6 +30,13 @@ module.exports = function(app){
      * POST: Login information
      */
     app.post('/login',
+        checkUserLoginMW(objectRepository),
+        function (req, res, next) {
+            if(res.tpl.error.length == 0){
+                return res.redirect('/items');
+            }
+            else return next();
+        },
         renderMW(objectRepository, 'login')
     );
 
@@ -29,8 +44,9 @@ module.exports = function(app){
      * User logout
      */
     app.use('/logout',
+        logoutMW(objectRepository),
         function (req, res, next) {
-            return res.redirect('/items');
+            return res.redirect('/login');
         }
     );
 
@@ -38,6 +54,7 @@ module.exports = function(app){
      * GET: Register view
      */
     app.get('/register',
+        inverseAuthMW(objectRepository),
         renderMW(objectRepository, 'register')
     );
 
@@ -45,6 +62,13 @@ module.exports = function(app){
      * POST: Register information
      */
     app.post('/register',
+        checkUserRegistrationMW(objectRepository),
+        function (req, res, next) {
+            if(res.tpl.error.length == 0){
+                return res.redirect('/login');
+            }
+            else return next();
+        },
         renderMW(objectRepository, 'register')
     );
 
@@ -52,6 +76,7 @@ module.exports = function(app){
      * GET: Website description
      */
     app.get('/about',
+        getSessionIdMW(objectRepository),
         renderMW(objectRepository, 'info')
     );
 
@@ -59,6 +84,7 @@ module.exports = function(app){
      * GET: Contact information
      */
     app.get('/contact',
+        getSessionIdMW(objectRepository),
         renderMW(objectRepository, 'contact')
     );
 

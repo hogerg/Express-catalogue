@@ -3,7 +3,6 @@
  */
 
 var renderMW = require('../middleware/generic/render');
-var mainRedirectMW = require('../middleware/generic/mainredirect');
 
 var getItemListMW = require('../middleware/items/getItemList');
 var getItemMW = require('../middleware/items/getItem');
@@ -12,6 +11,8 @@ var getCategoryListMW = require('../middleware/categories/getCategoryList');
 var getCategoryMW = require('../middleware/categories/getCategory');
 
 var filterItemListMW = require('../middleware/items/filterItemList');
+
+var getSessionIdMW = require('../middleware/generic/getSessionId');
 
 var itemModel = require('../models/item');
 var categoryModel = require('../models/category');
@@ -27,6 +28,7 @@ module.exports = function(app){
      * GET: Item list
      */
     app.get('/items',
+        getSessionIdMW(objectRepository),
         getItemListMW(objectRepository),
         getCategoryListMW(objectRepository),
         renderMW(objectRepository, 'stock')
@@ -36,6 +38,7 @@ module.exports = function(app){
      * POST: Filter items
      */
     app.post('/items',
+        getSessionIdMW(objectRepository),
         getItemListMW(objectRepository),
         getCategoryListMW(objectRepository),
         filterItemListMW(objectRepository),
@@ -46,6 +49,7 @@ module.exports = function(app){
      * GET: Details of the item with the provided id
      */
     app.get('/items/:id/details',
+        getSessionIdMW(objectRepository),
         getItemMW(objectRepository),
         getCategoryMW(objectRepository),
         renderMW(objectRepository, 'details')
