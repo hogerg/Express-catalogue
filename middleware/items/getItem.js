@@ -16,7 +16,7 @@ module.exports = function (objectrepository) {
             _id: req.param('id')
         }, function (err, result) {
             if ((err) || (!result)) {
-                return req.redirect('/items');
+                return res.redirect('/items');
             }
 
             res.tpl.item = result;

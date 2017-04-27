@@ -27,16 +27,18 @@ module.exports = function (objectrepository) {
             });
         }
 
-        itemModel.find({
-            name: new RegExp(keyword, "i"),
-        }, function (err, results) {
-            if (err) {
-                return next(err);
-            }
+        else {
+            itemModel.find({
+                name: new RegExp(keyword, "i"),
+            }, function (err, results) {
+                if (err) {
+                    return next(err);
+                }
 
-            res.tpl.items = results;
-            return next();
-        });
+                res.tpl.items = results;
+                return next();
+            });
+        }
     };
 
 };
